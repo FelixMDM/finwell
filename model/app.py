@@ -1,9 +1,11 @@
-from flask import Flask, render_template, request
+from flask import Flask, jsonify, render_template, request
+from flask_cors import CORS
 import pandas as pd
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import classification_report
+import json
 
 input_file = "../data/clean_data/data.csv"
 
@@ -49,29 +51,36 @@ y_pred = model.predict(X_test)
 print(classification_report(y_test, y_pred))
 
 app = Flask(__name__)
+CORS(app)
 
 @app.route('/', methods=["GET"])
 def hello_world():
     return render_template('index.html')
 
-@app.route('/', methods=["POST"])
+@app.route('/inquiry', methods=["POST"])
 def predict():
-    # take in the user request
-    inquiry = request.form['Inquiry']
-    f = open("./inquiries/inquiries.txt", "a")
-    f.write(f"{inquiry}\n")
-    X_new = vectorizer.transform([inquiry])
-    prediction = model.predict(X_new)
+    try:
+        data = request.json
+        inquiry = f"{data.get('Inquiry')}"
 
-    # pass it up to the ML model to actually take care of our request
-    classification = ""
-    if prediction < 1:
-        classification = "HOSS issue, refer to the main line"
-    else:
-        classification = "Approved, send meeting link"
+        # Write to file
+        with open("./inquiries/inquiries.txt", "a") as f:
+            f.write(f"{inquiry}\n")
 
-    print(classification)
-    return render_template('index.html', prediction=classification)
+        # Process with ML model
+        X_new = vectorizer.transform([inquiry])
+        prediction = model.predict(X_new)
+
+        classification = "HOSS issue, refer to the main line" if prediction < 1 else "Approved, send meeting link"
+        print(classification)
+
+        # Return JSON instead of HTML
+        return jsonify({
+            'status': 'success',
+            'classification': classification,
+        }), 200
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
 
 if __name__ == "__main__":
-    app.run(port=3000, debug=True)
+    app.run(port=8080, debug=True)
