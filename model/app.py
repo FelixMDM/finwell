@@ -4,7 +4,7 @@ import joblib
 import os 
 
 app = Flask(__name__)
-CORS(app, resources={r"/*": {"origins": ["http://localhost:3000", "https://finwellml-frontend.onrender.com"]}})
+CORS(app, origins=["http://localhost:3000", "https://finwellml-frontend.onrender.com"])
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 MODEL_PATH = os.path.join(BASE_DIR, 'model.joblib')
@@ -40,6 +40,7 @@ def predict():
             'classification': classification,
         }), 200
     except Exception as e:
+        app.logger.error(f"Error processing inquiry: {str(e)}")
         return jsonify({'error': str(e)}), 500
 
 if __name__ == "__main__":
