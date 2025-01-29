@@ -23,10 +23,6 @@ def predict():
         data = request.json
         inquiry = f"{data.get('Inquiry')}"
 
-        # Write to file (optional)
-        with open("./inquiries/inquiries.txt", "a") as f:
-            f.write(f"{inquiry}\n")
-
         # Process with ML model
         X_new = vectorizer.transform([inquiry])
         prediction = model.predict(X_new)
