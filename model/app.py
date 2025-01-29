@@ -1,13 +1,13 @@
 from flask import Flask, jsonify, request
 from flask_cors import CORS
-import joblib
+import os 
 
 app = Flask(__name__)
 CORS(app)
 
-# Load serialized model and vectorizer
-model = joblib.load('./model.joblib')
-vectorizer = joblib.load('./vectorizer.joblib')
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+MODEL_PATH = os.path.join(BASE_DIR, 'model.joblib')
+VECTORIZER_PATH = os.path.join(BASE_DIR, 'vectorizer.joblib')
 
 @app.route('/', methods=["GET"])
 def hello_world():
