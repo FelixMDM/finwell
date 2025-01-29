@@ -23,7 +23,7 @@ const Tool = () => {
 
     const logToServer = async (message: string) => {
         try {
-            const response = await fetch('http://localhost:8080/inquiry', {
+            const response = await fetch("https://finwellml.onrender.com/inquiry", {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
