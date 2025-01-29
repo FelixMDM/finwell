@@ -1,5 +1,6 @@
 from flask import Flask, jsonify, request
 from flask_cors import CORS
+import joblib
 import os 
 
 app = Flask(__name__)
@@ -8,6 +9,9 @@ CORS(app)
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 MODEL_PATH = os.path.join(BASE_DIR, 'model.joblib')
 VECTORIZER_PATH = os.path.join(BASE_DIR, 'vectorizer.joblib')
+
+model = joblib.load(MODEL_PATH)
+vectorizer = joblib.load(VECTORIZER_PATH)
 
 @app.route('/', methods=["GET"])
 def hello_world():
