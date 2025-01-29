@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 import { useState } from "react";
+import Classification from "../classification";
 
 interface FormElements extends HTMLFormControlsCollection {
     comments: HTMLInputElement
@@ -18,6 +19,7 @@ type response = {
 const Tool = () => {
     const [comments, setComments] = useState("");
     const [classification, setClassification] = useState("");
+    const [status, setStatus] = useState("");
 
     const logToServer = async (message: string) => {
         try {
@@ -33,6 +35,7 @@ const Tool = () => {
 
             const data: response = await response.json();
             setClassification(data.classification.toString());
+            setStatus(data.status.toString());
         } catch (error) {
             console.error('Failed to send inquiry to server:', error);
         }
@@ -66,7 +69,7 @@ const Tool = () => {
                     SUBMIT
                 </button>
                 <div>
-                    {classification}
+                    <Classification result={classification} status={status}/>
                 </div>
             </form>
         </div>
