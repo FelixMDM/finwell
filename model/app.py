@@ -6,8 +6,8 @@ app = Flask(__name__)
 CORS(app)
 
 # Load serialized model and vectorizer
-model = joblib.load('model.joblib')
-vectorizer = joblib.load('vectorizer.joblib')
+model = joblib.load('./model.joblib')
+vectorizer = joblib.load('./vectorizer.joblib')
 
 @app.route('/', methods=["GET"])
 def hello_world():
