@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "next/link";
-// import links from "@/data/FooterData";
+import links from "@/data/FooterData";
 
 const Footer = () => {
     return (
@@ -12,7 +12,7 @@ const Footer = () => {
                 Disclaimer
             </Link> */}
             <div className="absolute right-0 mr-6 flex gap-4">
-                {/* {links.map((link, index: number) => (
+                {links.map((link, index: number) => (
                     <Link
                         href={link.link}
                         key={index}
@@ -21,7 +21,7 @@ const Footer = () => {
                     >
                         {link.icon}
                     </Link>
-                ))} */}
+                ))}
             </div>
         </div>
     )
