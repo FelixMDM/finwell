@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import Head from "next/head";
 import localFont from "next/font/local";
+
 import "./globals.css";
 import NavBar from "@/components/NavBar";
 import Footer from "@/components/Footer";
@@ -31,9 +31,6 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-[#FAF8F6]`}
       >
-        <Head>
-          <link rel="shortcut icon" href="./public/finwell.svg" />
-        </Head>
         <NavBar />
         {children}
         <Footer />
