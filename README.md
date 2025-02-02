@@ -1,36 +1,21 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Financial Wellness Intake Form Assistant
 
-## Getting Started
+## What is this?
 
-First, run the development server:
+This website is a tool intended for use within the Financial Wellness Program, for the purposes of filling out the intake form accurately and efficiently. Provide intake form requests on the home page and receive guidance based on historical intake form data.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Why does this exist?
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+I understand how daunting of a task it can be to respond to intake form requests. Yes, it becomes easier with time; though, never straightforward. My goal is that after I am gone and unable to provide you with guidance, you have a resource to turn to apart from Yazleen, in the form of this website.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## How does this work?
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Located on the home page is a text box. Copy paste difficult intake form requests here. Requests are sent to the server and fed through a machine-learning model trained on historical intake form results. Finally, hit submit to view results.
 
-## Learn More
+## How accurate is this?
 
-To learn more about Next.js, take a look at the following resources:
+As of writing this blurb, this model returns a weighted average precision score of 78%, and a macro average of 84%. That is to say, based on the training data I've supplied the model with, you can confidently expect the model to determine the correct course of action around 81% of the time.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Disclaimer
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Please note that the handling of intake form requests is an involved process that requires context and training far beyond what I've implemented in the model seen here. Given the nuanced nature of the requests we receive on the intake form, it is entirely possible that we are able to take on appointments that my algorithm would otherwise have you reject. Consequently, I encourage you to interpret the results returned by this tool as more of a guiding hand in the case of uncertainty rather than as an infallible fact.
